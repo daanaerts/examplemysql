@@ -4,6 +4,7 @@ console.log('working server');
 
 const mysql = require('mysql');
 const app = require('express')();
+const bodyParser = require('body-parser');
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -31,6 +32,7 @@ app.get('/todos', (request, response) => {
     response.status(200).json({ status: 200, data: data });
   });
 });
+
 
 app.post('/todo', (request, response) => {
   connection.query('insert into todos set ?', [{ title: 'todo' }], (err) => {
