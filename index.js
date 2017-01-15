@@ -33,8 +33,8 @@ app.get('/todos', (request, response) => {
 });
 
 // Update the title where the id is 10
-app.patch('/todos', (request, response) => {
-  connection.query('UPDATE todos SET title="updated title", updatedAt = CURRENT_TIMESTAMP WHERE todoId=10', (error, data) => {
+app.patch('/todos/:id', (request, response) => {
+  connection.query('UPDATE todos SET title="updated title", updatedAt = CURRENT_TIMESTAMP WHERE todoId = ?', [request.params.id], (error, data) => {
     if (error) {
       return response.status(500).json(error);
     }
@@ -44,7 +44,7 @@ app.patch('/todos', (request, response) => {
 });
 
 const server = require('http').createServer(app);
-server.listen(3000);
+server.listen(3001);
 
 console.log(`server listening on port ${server.address().port}`)
 
