@@ -15,6 +15,9 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
+// use bodyParser 
+app.use(bodyParser.json());
+
 connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
   if (error) throw error;
   console.log('MySQL connected');
@@ -35,7 +38,7 @@ app.get('/todos', (request, response) => {
 
 
 app.post('/todo', (request, response) => {
-  connection.query('insert into todos set ?', [{ title: 'todo' }], (err) => {
+  connection.query('insert into todos set ?', request.body, (err) => {
     if (err) {
       response.status(400);
       return;
