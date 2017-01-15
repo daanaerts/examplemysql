@@ -47,17 +47,6 @@ app.post('/todo', (request, response) => {
   })
 })
 
-// I made this first by mistake :) 
-//  app.delete('/todo:id', (request, response) => {
-//         connection.query('delete from todos where todoId=?', req.params.id, (err) => {
-//           if(err){
-//             response.status(400).json({ status: 400});
-//             return;
-//           }
-//           response.status(204).json({status: 204});
-//         })
-//     })
-
 const server = require('http').createServer(app);
 server.listen(3000);
 
