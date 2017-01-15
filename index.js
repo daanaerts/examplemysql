@@ -19,16 +19,21 @@ connection.query('SELECT 1 + 1 AS solution', function(error, results, fields) {
   console.log('MySQL connected');
 });
 
-app.get('', (request, response) => {
-  response.status(200).json({ message: 'ok' });
-});
-
 app.get('/todos', (request, response) => {
   connection.query('SELECT * FROM todos', (error, data) => {
     if (error) {
       return response.status(500).json(error);
     }
     response.status(200).json({ status: 200, data: data });
+  });
+});
+
+app.get('/todos/:id',(request, response)=> {
+  connection.query('SELECT * FROM todos WHERE todoId = ?', [request.params.id], (error, data) => {
+    if (data[0] === undefined) {
+      return response.status(404).json({status: 404, data: error});
+    }
+    response.status(200).json({status: 200, data: data});
   });
 });
 
