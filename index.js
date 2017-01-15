@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(error, results, fields) {
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
   if (error) throw error;
   console.log('MySQL connected');
 });
@@ -31,6 +31,27 @@ app.get('/todos', (request, response) => {
     response.status(200).json({ status: 200, data: data });
   });
 });
+
+app.post('/todo', (request, response) => {
+  connection.query('insert into todos set ?', [{ title: 'todo' }], (err) => {
+    if (err) {
+      response.status(400);
+      return;
+    }
+    response.status(201).json({ status: 201 });
+  })
+})
+
+// I made this first by mistake :) 
+//  app.delete('/todo:id', (request, response) => {
+//         connection.query('delete from todos where todoId=?', req.params.id, (err) => {
+//           if(err){
+//             response.status(400).json({ status: 400});
+//             return;
+//           }
+//           response.status(204).json({status: 204});
+//         })
+//     })
 
 const server = require('http').createServer(app);
 server.listen(3000);
