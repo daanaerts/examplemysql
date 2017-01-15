@@ -29,7 +29,6 @@ app.get('/todos', (request, response) => {
       return response.status(500).json(error);
     }
     response.status(200).json({ status: 200, data: data });
-    console.log(response);
   });
 });
 
@@ -37,3 +36,5 @@ const server = require('http').createServer(app);
 server.listen(3000);
 
 console.log(`server listening on port ${server.address().port}`)
+
+console.log('I am a change');
