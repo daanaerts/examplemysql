@@ -8,8 +8,8 @@ const app = require('express')();
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'my-secret-pw',
-  database: 'exampleeeee'
+  password: 'majdi',
+  database: 'school'
 });
 
 connection.connect();
@@ -31,7 +31,16 @@ app.get('/todos', (request, response) => {
     response.status(200).json({ status: 200, data: data });
   });
 });
+//majdi delete
 
+app.delete('/todos', (request, response) => {
+  connection.query('delete from todos WHERE todoId = 4;', (error, data) => {
+    if (error) {
+      return response.status(500).json(error);
+    }
+    response.status(200).json({ status: 200, data: data });
+  });
+});
 const server = require('http').createServer(app);
 server.listen(3000);
 
