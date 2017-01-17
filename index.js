@@ -34,7 +34,7 @@ app.get('/todos', (request, response) => {
 //majdi delete
 
 app.delete('/todos', (request, response) => {
-  connection.query('delete from todos WHERE todoId = 4;', (error, data) => {
+   connection.query('delete from todos WHERE todoId =?;', [request.params.id], (error, data) =>  {
     if (error) {
       return response.status(500).json(error);
     }
