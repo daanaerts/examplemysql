@@ -29,9 +29,9 @@ app.get('/todos', (request, response) => {
 });
 
 app.get('/todos/:id',(request, response)=> {
-  connection.query('SELECT * FROM todos WHERE todoId = ?', [request.params.id], (error, data) => {
+  connection.query('SELECT * FROM todos WHERE todoId = ?', [request.params.id], (error,data) => {
     if (data[0] === undefined) {
-      return response.status(404).json({status: 404, data: error});
+      return response.status(404).json({status: 404, error: "No such entry"});
     }
     response.status(200).json({status: 200, data: data});
   });
