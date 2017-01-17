@@ -32,7 +32,6 @@ app.get('/todos', (request, response) => {
   });
 });
 //majdi delete
-
 app.delete('/todos', (request, response) => {
    connection.query('delete from todos WHERE todoId =?;', [request.params.id], (error, data) =>  {
     if (error) {
@@ -43,7 +42,5 @@ app.delete('/todos', (request, response) => {
 });
 const server = require('http').createServer(app);
 server.listen(3000);
-
 console.log(`server listening on port ${server.address().port}`)
-
 console.log('I am a change');
