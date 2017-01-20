@@ -1,8 +1,9 @@
 'use strict';
 
 console.log('working server');
-
+const bodyParser = require('body-parser');
 const app = require('express')();
+app.use(bodyParser.json());
 require('./lib/controllers')(app);
 
 const server = require('http').createServer(app);
